@@ -1,0 +1,28 @@
+With a configuration file I post my status to Co-op when I run beardo status 
+with a status.
+
+With a configuration file I see the status ID when I run beardo status with a 
+status.
+
+Without a configuration file I am prompted for my email, password, and groups 
+then my status is posted to Co-op when I run beardo status with a status.
+
+I am shown help text when I run beardo status without a status.
+
+
+Without a configuration file I am shown all commands when I run beardo help.
+
+Without a configuration file I am prompted for my email, password, and groups 
+when I run beardo init.
+
+With a configuration file I am prompted for my email, password, and groups with 
+my existing email and groups as the default when I run beardo init.
+
+With a configuration file with too flexible permissions I am prompted to change 
+the permissions when I run beardo init.
+
+With a configuration file with too few permission I am prompted to change the 
+permissions when I run beardo init.
+
+With a configuration file I run beardo status with a status then beardo undo to 
+remove that status.
