@@ -1,5 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
-require File.join(File.dirname(__FILE__), '..' , 'lib', 'beardo')
+require File.join(File.dirname(__FILE__), 'spec_helper')
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+require 'beardo'
 
 def create_config
   @config = { 'email'    => 'ralph@robotsinc.com', 
@@ -8,25 +9,33 @@ def create_config
 end
 
 describe "beardo command line interface" do
-  before do
-    create_config
-    @beardo = Object.new
-    stub(Beardo).new { @beardo }
-    stub(Beardo).read_config { @config }
-    stub(@beardo).post { true }
-    @rest_client = Object.new
-    stub(RestClient::Resource).new { @rest_client }
-    stub(@rest_client).post { true }
-  end
+  describe "running the executable" do
+    before do
+      create_config
+      @beardo = Object.new
+      stub(Beardo).new { @beardo }
+      stub(Beardo).read_config { @config }
+      stub(@beardo).post { true }
+      @rest_client = Object.new
+      stub(RestClient::Resource).new { @rest_client }
+      stub(@rest_client).post { true }
+    end
 
-  it "should read in configuration options" do
-    mock(Beardo).read_config { @config }
-    Beardo.run([])
-  end
+    it "should read in configuration options" do
+      mock(Beardo).read_config { @config }
+      Beardo.run([])
+    end
 
-  it "should create a new instance of a Beardo on .run" do
-    mock(Beardo).new(@config) { @beardo }
-    Beardo.run([])
+    it "should create a new instance of a Beardo on .run" do
+      mock(Beardo).new(@config) { @beardo }
+      Beardo.run([])
+    end
+
+    it "should post to coop on .run" do
+      @beardo = Object.new
+      mock(@beardo).post('work sucks') { true }
+      Beardo.run(['work sucks'])
+    end
   end
 
   it "should default to the home directory for config_path" do
@@ -35,6 +44,13 @@ describe "beardo command line interface" do
 
   it "should default to .beardorc for config_file" do
     Beardo.config_file.should =~ /.beardorc$/
+  end
+
+  it "should read config from YAML" do
+    @config_file = "file"
+    stub(Beardo).config_file { @config_file }
+    mock(YAML).load_file(@config_file)
+    Beardo.read_config
   end
 
   describe "temporary directory exists" do
@@ -58,12 +74,6 @@ describe "beardo command line interface" do
     after do
       FileUtils.rm_rf(@config_path)
     end
-  end
-
-  it "should post to coop on .run" do
-    @beardo = Object.new
-    mock(@beardo).post('work sucks') { true }
-    Beardo.run(['work sucks'])
   end
 end
 

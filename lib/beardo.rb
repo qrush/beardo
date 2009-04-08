@@ -33,7 +33,7 @@ class Beardo
     end
 
     def read_config
-      YAML.load_file(CONFIG_FILE)
+      YAML.load_file(config_file)
     end
   end
 end
