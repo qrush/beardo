@@ -18,15 +18,15 @@ class Beardo
     resource["groups/#{self.group}/statuses"].post("<status>#{message}</status>", :content_type => 'application/xml')
   end
 
-  def config_path
-    ENV['home']
-  end
-
-  def config_file
-    File.join(config_path, '.beardorc')
-  end
-
   class << self
+    def config_path
+      ENV['HOME']
+    end
+
+    def config_file
+      File.join(config_path, '.beardorc')
+    end
+
     def run(args)
       beardo = Beardo.new(read_config)
       beardo.post(args[0])

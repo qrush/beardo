@@ -29,19 +29,27 @@ describe "beardo command line interface" do
     Beardo.run([])
   end
 
+  it "should default to the home directory for config_path" do
+    Beardo.config_path.should == ENV['HOME']
+  end
+
+  it "should default to .beardorc for config_file" do
+    Beardo.config_file.should =~ /.beardorc$/
+  end
+
   describe "temporary directory exists" do
     before do
       @config_path = File.join('/', 'tmp', 'beardo')
       begin
-        stub(@beardo).config_path { @config_path }
-        stub(@beardo).config_file { File.join(@config_path, '.beardorc') }
+        stub(Beardo).config_path { @config_path }
+        stub(Beardo).config_file { File.join(@config_path, '.beardorc') }
         Dir.mkdir(@config_path)
       rescue Errno::EEXIST
       end
     end
 
     it "should produce correct configs when send .read_config" do
-      File.open(@beardo.config_file, 'w') do |f|
+      File.open(Beardo.config_file, 'w') do |f|
         f.puts(@config.to_yaml)
       end
       Beardo.read_config.should == @config
