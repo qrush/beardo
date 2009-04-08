@@ -28,9 +28,9 @@ class Beardo
       File.join(config_path, '.beardorc')
     end
 
-    def run(args)
+    def run(message)
       beardo = Beardo.new(read_config)
-      beardo.post(args[0])
+      beardo.post(message)
     end
 
     def read_config

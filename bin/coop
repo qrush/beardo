@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+ARGV.unshift "--status"
+load File.join(File.dirname(__FILE__), "bd")

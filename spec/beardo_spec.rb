@@ -23,18 +23,18 @@ describe "beardo command line interface" do
 
     it "should read in configuration options" do
       mock(Beardo).read_config { @config }
-      Beardo.run([])
+      Beardo.run('')
     end
 
     it "should create a new instance of a Beardo on .run" do
       mock(Beardo).new(@config) { @beardo }
-      Beardo.run([])
+      Beardo.run('')
     end
 
     it "should post to coop on .run" do
       @beardo = Object.new
       mock(@beardo).post('work sucks') { true }
-      Beardo.run(['work sucks'])
+      Beardo.run('work sucks')
     end
 
   end
