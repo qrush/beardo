@@ -2,4 +2,23 @@
 
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'beardo'
-Beardo.run(ARGV)
+
+help = <<HELP
+  Beardo is a simple command line interface to Co-op (http://coopapp.com)
+
+  Basic command line usage:
+  bd "your status message"
+HELP
+
+status = ""
+
+opts = OptionParser.new do |parser|
+  parser.banner = help
+  parser.on("--status", "Set your co-op status") do |s|
+    status = ARGV.first
+  end
+end
+
+opts.parse!
+
+Beardo.run(status)

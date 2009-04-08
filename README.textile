@@ -12,4 +12,12 @@ It uses "rest-client":http://github.com/adamwiggins/rest-client as a wrapper aro
 
 h2. Do I need a beard, too?
 
-No, you don't.
+No, you don't. All you need is a @.beardorc@ in your @HOME@ directory, with the following info (in YAML format):
+
+<pre>
+email: dirty@hippie.com
+password: drumcircle
+group: 422
+</pre>
+
+Then, run @bd "your-message-here"@ and your status on Co-op should be updated.

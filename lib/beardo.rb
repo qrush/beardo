@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'yaml'
 require 'rest_client'
+require 'optparse'
 
 class Beardo
   attr_accessor :group, :email, :password

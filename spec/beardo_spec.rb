@@ -9,7 +9,7 @@ def create_config
 end
 
 describe "beardo command line interface" do
-  describe "running the executable" do
+  describe "running from the executable" do
     before do
       create_config
       @beardo = Object.new
@@ -36,6 +36,7 @@ describe "beardo command line interface" do
       mock(@beardo).post('work sucks') { true }
       Beardo.run(['work sucks'])
     end
+
   end
 
   it "should default to the home directory for config_path" do
