@@ -18,6 +18,8 @@ begin
     s.description = "Communicate with co-workers through the best interface available: your terminal"
     s.authors = ["Nick Quaranto", "Mike Burns"]
     s.add_dependency('adamwiggins-rest-client', '>= 0.9.2')
+    s.executables = ["bd", "coop"]
+    s.files = FileList["[A-Z]*", "{bin,lib,spec}/**/*"]
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"

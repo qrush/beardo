@@ -7,12 +7,11 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nick Quaranto", "Mike Burns"]
   s.date = %q{2009-04-08}
-  s.default_executable = %q{bd}
   s.description = %q{Communicate with co-workers through the best interface available: your terminal}
   s.email = %q{nick@quaran.to}
-  s.executables = ["bd"]
+  s.executables = ["bd", "coop"]
   s.extra_rdoc_files = ["README.textile"]
-  s.files = ["README.textile", "VERSION.yml", "bin/bd", "lib/beardo.rb", "spec/beardo_spec.rb", "spec/spec_helper.rb"]
+  s.files = ["Rakefile", "README.textile", "TODO", "VERSION.yml", "bin/bd", "bin/coop", "lib/beardo.rb", "spec/beardo_spec.rb", "spec/executable_spec.rb", "spec/spec_helper.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/qrush/beardo}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
