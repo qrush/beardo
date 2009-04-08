@@ -15,7 +15,6 @@ class Beardo
   end
 
   def post(message)
-    RestClient.log = 'stdout'
     resource = RestClient::Resource.new("http://coopapp.com", {
       :user => self.email, :password => self.password
     })
