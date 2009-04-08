@@ -5,9 +5,6 @@ require 'rest_client'
 class Beardo
   attr_accessor :group, :email, :password
 
-  CONFIG_PATH = '/tmp/beardo'
-  CONFIG_FILE = "#{CONFIG_PATH}/.beardorc"
-
   def initialize(config)
     self.group = config['group']
     self.email = config['email']
@@ -19,6 +16,14 @@ class Beardo
       :user => self.email, :password => self.password
     })
     resource["groups/#{self.group}/statuses"].post("<status>#{message}</status>", :content_type => 'application/xml')
+  end
+
+  def config_path
+    ENV['home']
+  end
+
+  def config_file
+    File.join(config_path, '.beardorc')
   end
 
   class << self

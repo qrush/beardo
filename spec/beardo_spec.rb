@@ -31,21 +31,24 @@ describe "beardo command line interface" do
 
   describe "temporary directory exists" do
     before do
+      @config_path = File.join('/', 'tmp', 'beardo')
       begin
-        Dir.mkdir(Beardo::CONFIG_PATH)
+        stub(@beardo).config_path { @config_path }
+        stub(@beardo).config_file { File.join(@config_path, '.beardorc') }
+        Dir.mkdir(@config_path)
       rescue Errno::EEXIST
       end
     end
 
     it "should produce correct configs when send .read_config" do
-      File.open(Beardo::CONFIG_FILE, 'w') do |f|
+      File.open(@beardo.config_file, 'w') do |f|
         f.puts(@config.to_yaml)
       end
       Beardo.read_config.should == @config
     end
 
     after do
-      FileUtils.rm_rf(Beardo::CONFIG_PATH)
+      FileUtils.rm_rf(@config_path)
     end
   end
 
