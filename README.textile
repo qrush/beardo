@@ -1,0 +1,15 @@
+h1. beardo
+
+"Co-ops are run by dirty hippies; dirty hippies have beards; therefore, this app is called beardo."
+
+h2. No, seriously.
+
+This is a command line interface for "Co-op":http://coopapp.com, since some of us are too cool to use the web interface. It started as a "boston.rb":http://bostonrb.org hackfest project, so blame the pizza and beer if there's bugs.
+
+h2. Wait, what?
+
+It uses "rest-client":http://github.com/adamwiggins/rest-client as a wrapper around the "Co-op API":http://coopapp.com/api
+
+h2. Do I need a beard, too?
+
+No, you don't.
