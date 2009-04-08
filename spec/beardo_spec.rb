@@ -1,11 +1,15 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 require File.join(File.dirname(__FILE__), '..' , 'lib', 'beardo')
 
+def create_config
+  @config = { 'email'    => 'ralph@robotsinc.com', 
+              'password' => 'robot',
+              'group'    => 1337 }
+end
+
 describe "beardo command line interface" do
   before do
-    @config = { :email => 'ralph@robotsinc.com', 
-                :password => 'robot',
-                :group => 1337 }
+    create_config
     @beardo = Object.new
     stub(Beardo).new { @beardo }
     stub(Beardo).read_config { @config }
@@ -54,18 +58,16 @@ end
 
 describe "instance methods" do
   before do
-    @config = { :email => 'ralph@robotsinc.com', 
-                :password => 'robot',
-                :group => 1337 }
+    create_config
     @rest_client = Object.new
   end
 
   it "should send the message to Coop on #post" do
-    mock(@rest_client).post('<status>f this</status>')
+    mock(@rest_client)["groups/#{@config['group']}/statuses"].stub!.post("<status>f this</status>", :content_type => "application/xml")
     mock(RestClient::Resource).
-      new("http://coopapp.com/groups/#{@config[:group]}/statuses",
-          {:user => @config[:email],
-           :password => @config[:password]}) { @rest_client }
+      new("http://coopapp.com",
+          {:user => @config['email'],
+           :password => @config['password']}) { @rest_client }
     @beardo = Beardo.new(@config)
     @beardo.post('f this')
   end
